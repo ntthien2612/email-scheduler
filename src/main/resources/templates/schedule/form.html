@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${schedule.id != null} ? 'Edit Schedule' : 'New Schedule'"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body class="container mt-4">
+
+<h2 th:text="${schedule.id != null} ? 'Edit Schedule' : 'Create New Schedule'"></h2>
+
+<form th:action="@{${schedule.id != null} ? '/schedules/' + ${schedule.id} + '/edit' : '/schedules/new'}"
+      th:object="${schedule}" method="post" class="needs-validation" novalidate>
+
+    <!-- Name -->
+    <div class="mb-3">
+        <label class="form-label">Schedule Name</label>
+        <input type="text" th:field="*{name}" class="form-control" placeholder="Enter schedule name" required/>
+        <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    </div>
+
+    <!-- Type -->
+    <div class="mb-3">
+        <label class="form-label">Type</label>
+        <select th:field="*{type}" class="form-select">
+            <option value="">-- Select Type --</option>
+            <option th:value="DAILY">Daily</option>
+            <option th:value="WEEKLY">Weekly</option>
+            <option th:value="MONTHLY">Monthly</option>
+            <option th:value="CRON">Custom Cron</option>
+        </select>
+        <div class="text-danger" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
+    </div>
+
+    <!-- Cron expression (nếu type = CRON) -->
+    <div class="mb-3">
+        <label class="form-label">Cron Expression</label>
+        <input type="text" th:field="*{cronExpression}" class="form-control"
+               placeholder="e.g. 0 0 9 * * ?" />
+        <div class="form-text">Only required if type = CRON</div>
+    </div>
+
+    <!-- Receiver Email -->
+    <div class="mb-3">
+        <label class="form-label">Receiver</label>
+        <select th:field="*{receiverEmail}" class="form-select" required>
+            <option value="" disabled th:selected="${receiverEmail == null}">-- Select User --</option>
+            <option th:each="user : ${users}"
+                    th:value="${user.email}"
+                    th:text="${user.name + ' (' + user.email + ')'}"
+                    th:selected="${receiverEmail == user.email}">
+            </option>
+        </select>
+        <div class="text-danger" th:if="${#fields.hasErrors('receiverEmail')}" th:errors="*{receiverEmail}"></div>
+    </div>
+
+    <!-- Template selection -->
+    <div class="mb-3">
+        <label class="form-label">Template</label>
+        <select name="templateId" class="form-select" required>
+            <option value="">-- Select Template --</option>
+            <option th:each="t : ${templates}"
+                    th:value="${t.id}"
+                    th:text="${t.name}"
+                    th:selected="${schedule.template != null} ? ${t.id} == ${schedule.template.id} : false">
+            </option>
+        </select>
+    </div>
+
+    <!-- Status -->
+    <div class="mb-3">
+        <label class="form-label">Status</label>
+        <select th:field="*{status}" class="form-select">
+            <option th:value="ACTIVE">Active</option>
+            <option th:value="INACTIVE">Inactive</option>
+        </select>
+    </div>
+
+    <!-- Buttons -->
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a th:href="@{/schedules}" class="btn btn-secondary">Cancel</a>
+
+</form>
+
+</body>
+</html>

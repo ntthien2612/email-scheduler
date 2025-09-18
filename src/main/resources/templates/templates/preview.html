@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Preview</title>
+</head>
+<body>
+<h2 th:text="${template.subject}"></h2>
+<div th:utext="${template.body}"></div>
+<a href="/templates">Back</a>
+</body>
+</html>
