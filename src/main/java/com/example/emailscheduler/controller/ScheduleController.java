@@ -105,7 +105,7 @@ public class ScheduleController {
         }
         try {
             scheduleService.update(id, scheduleForm);
-            redirect.addFlashAttribute("success", "Cập nhật Schedule thành công!");
+            redirect.addFlashAttribute("success", "Schedule updated successfully!");
             return "redirect:/schedules";
         } catch (IllegalStateException e) {
             model.addAttribute("error", e.getMessage());
@@ -120,7 +120,7 @@ public class ScheduleController {
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable Long id, RedirectAttributes redirect) {
         scheduleService.delete(id);
-        redirect.addFlashAttribute("success", "Xóa Schedule thành công!");
+        redirect.addFlashAttribute("success", "Schedule deleted successfully!");
         return "redirect:/schedules";
     }
 
@@ -139,7 +139,7 @@ public class ScheduleController {
 
             if (cron == null || cron.isBlank() || !cron.matches(regex)) {
                 result.rejectValue("cronExpression", "cronExpression.invalid",
-                        "Cron expression không hợp lệ. Format: sec min hour day month day-of-week");
+                        "Invalid cron expression. Format: sec min hour day month day-of-week");
             }
         }
     }

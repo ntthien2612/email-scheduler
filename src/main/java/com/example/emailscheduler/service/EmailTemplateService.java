@@ -75,7 +75,7 @@ public class EmailTemplateService {
      */
     public void delete(Long id) {
         if (scheduleRepo.existsByTemplateId(id)) {
-            throw new IllegalStateException("Template id=" + id + " đang được sử dụng trong Schedule, không thể xóa.");
+            throw new IllegalStateException("Template id=" + id + " is being used in the Schedule and cannot be deleted.");
         }
         templateRepo.deleteById(id);
     }

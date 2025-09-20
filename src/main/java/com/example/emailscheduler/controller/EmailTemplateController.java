@@ -60,7 +60,7 @@ public class EmailTemplateController {
         }
         try {
             templateService.create(template);
-            redirect.addFlashAttribute("success", "Tạo mới template thành công!");
+            redirect.addFlashAttribute("success", "Template created successfully!");
             return "redirect:/templates";
         } catch (IllegalStateException e) {
             log.warn("Failed to create template: {}", e.getMessage());
@@ -92,7 +92,7 @@ public class EmailTemplateController {
         }
         try {
             templateService.update(id, template);
-            redirect.addFlashAttribute("success", "Cập nhật template thành công!");
+            redirect.addFlashAttribute("success", "Template updated successfully!");
             return "redirect:/templates";
         } catch (IllegalStateException e) {
             log.warn("Failed to update template {}: {}", id, e.getMessage());
@@ -108,7 +108,7 @@ public class EmailTemplateController {
     public String delete(@PathVariable Long id, RedirectAttributes redirect) {
         try {
             templateService.delete(id);
-            redirect.addFlashAttribute("success", "Xóa template thành công!");
+            redirect.addFlashAttribute("success", "Template deleted successfully!");
         } catch (IllegalStateException e) {
             log.warn("Failed to delete template {}: {}", id, e.getMessage());
             redirect.addFlashAttribute("error", e.getMessage());
