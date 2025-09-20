@@ -8,31 +8,41 @@ import org.springframework.stereotype.Component;
 
 import com.example.emailscheduler.entity.Schedule;
 import com.example.emailscheduler.repository.ScheduleRepository;
+import com.example.emailscheduler.util.CronUtils;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class EmailJobScheduler {
 
     private final ScheduleRepository scheduleRepository;
     private final MailService mailService;
 
-    @Scheduled(cron = "0 * * * * *") 
+    @Scheduled(cron = "0 * * * * *") // chạy mỗi phút
     @Transactional
     public void runSchedules() {
+        LocalDateTime now = LocalDateTime.now();
         List<Schedule> schedules = scheduleRepository.findByStatusWithTemplate(Schedule.Status.ACTIVE);
+
         for (Schedule s : schedules) {
             try {
-                mailService.sendEmail(
-                        s.getReceiverEmail(),
-                        s.getTemplate().getSubject(),
-                        s.getTemplate().getBody()
-                );
-                System.out.println("Sent email to " + s.getReceiverEmail() + " at " + LocalDateTime.now());
+                if (CronUtils.isMatch(s.getCronExpression(), now)) {
+                    mailService.sendEmail(
+                            s.getReceiverEmail(),
+                            s.getTemplate().getSubject(),
+                            s.getTemplate().getBody()
+                    );
+                    log.info("Scheduled email sent to {} using template '{}' at {}",
+                            s.getReceiverEmail(), s.getTemplate().getName(), now);
+                }
             } catch (Exception e) {
-                System.err.println("Failed to send email: " + e.getMessage());
+                log.error("Failed to send email to {} at {}. Reason: {}",
+                        s.getReceiverEmail(), now, e.getMessage(), e);
             }
         }
     }

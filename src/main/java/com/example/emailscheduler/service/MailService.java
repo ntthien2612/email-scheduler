@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MailService {
 
     private final JavaMailSender mailSender;
@@ -23,5 +25,7 @@ public class MailService {
         helper.setText(body, true);
 
         mailSender.send(message);
+
+        log.info("Email sent successfully to {} with subject '{}'", to, subject);
     }
 }

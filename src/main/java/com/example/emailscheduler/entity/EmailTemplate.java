@@ -15,12 +15,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Entity đại diện cho bảng "email_templates".
+ * 
+ * Chứa thông tin mẫu email:
+ * - Tên template
+ * - Tiêu đề email
+ * - Nội dung email (body)
+ * - Thời gian tạo & cập nhật
+ */
 @Entity
 @Table(name = "email_templates")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmailTemplate {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,12 +42,27 @@ public class EmailTemplate {
     private String subject;
 
     @Lob
-    @Column(nullable = false)
-    private String body; // HTML or plain text
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String body;
 
+    @Column(updatable = false, nullable = false)
     private Instant createdAt;
+
     private Instant updatedAt;
 
-    @PrePersist public void prePersist(){ createdAt = Instant.now(); }
-    @PreUpdate  public void preUpdate(){ updatedAt = Instant.now(); }
+    /**
+     * Gán giá trị mặc định cho createdAt trước khi persist.
+     */
+    @PrePersist
+    public void prePersist() {
+        createdAt = Instant.now();
+    }
+
+    /**
+     * Cập nhật giá trị updatedAt trước khi update.
+     */
+    @PreUpdate
+    public void preUpdate() {
+        updatedAt = Instant.now();
+    }
 }

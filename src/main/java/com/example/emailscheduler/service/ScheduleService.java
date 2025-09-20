@@ -1,81 +1,107 @@
 package com.example.emailscheduler.service;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
+import com.example.emailscheduler.dto.ScheduleForm;
 import com.example.emailscheduler.entity.EmailTemplate;
 import com.example.emailscheduler.entity.Schedule;
 import com.example.emailscheduler.repository.EmailTemplateRepository;
 import com.example.emailscheduler.repository.ScheduleRepository;
-
-import jakarta.transaction.Transactional;
+import com.example.emailscheduler.util.CronUtils;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+/**
+ * Service xử lý nghiệp vụ liên quan đến Schedule.
+ */
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ScheduleService {
 
     private final ScheduleRepository scheduleRepo;
     private final EmailTemplateRepository templateRepo;
 
-    @Transactional
-    public Schedule create(Schedule schedule, Long templateId) {
-        EmailTemplate template = templateRepo.findById(templateId)
-                .orElseThrow(() -> new IllegalArgumentException("Template not found"));
-        schedule.setTemplate(template);
+    /**
+     * Tạo mới một Schedule từ ScheduleForm.
+     */
+    public Schedule create(ScheduleForm scheduleForm) {
+        EmailTemplate template = getTemplate(scheduleForm.getTemplateId());
+        Schedule schedule = new Schedule();
+        applyFormToSchedule(scheduleForm, schedule, template);
+        return scheduleRepo.save(schedule);
+    }
 
-        // nếu type != CRON thì tự sinh cron
-        if (schedule.getType() != Schedule.Type.CRON) {
-            schedule.setCronExpression(generateCron(schedule));
-        }
+    /**
+     * Cập nhật Schedule có sẵn theo id.
+     */
+    public Schedule update(Long id, ScheduleForm scheduleForm) {
+        Schedule schedule = scheduleRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Schedule not found with id: " + id));
+
+        EmailTemplate template = getTemplate(scheduleForm.getTemplateId());
+        applyFormToSchedule(scheduleForm, schedule, template);
 
         return scheduleRepo.save(schedule);
     }
 
-    @Transactional
-    public Schedule update(Long id, Schedule newSchedule, Long templateId) {
-        Schedule existing = scheduleRepo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Schedule not found"));
-
-        EmailTemplate template = templateRepo.findById(templateId)
-                .orElseThrow(() -> new IllegalArgumentException("Template not found"));
-
-        existing.setName(newSchedule.getName());
-        existing.setType(newSchedule.getType());
-        existing.setReceiverEmail(newSchedule.getReceiverEmail());
-        existing.setStatus(newSchedule.getStatus());
-        existing.setTemplate(template);
-
-        if (existing.getType() != Schedule.Type.CRON) {
-            existing.setCronExpression(generateCron(existing));
-        } else {
-            existing.setCronExpression(newSchedule.getCronExpression());
-        }
-
-        return scheduleRepo.save(existing);
-    }
-
+    /**
+     * Xóa Schedule theo id.
+     */
     public void delete(Long id) {
         scheduleRepo.deleteById(id);
     }
 
+    /**
+     * Tìm Schedule theo id.
+     */
+    @Transactional(readOnly = true)
     public Schedule findById(Long id) {
         return scheduleRepo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Schedule not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Schedule not found with id: " + id));
     }
 
+    /**
+     * Lấy tất cả Schedule.
+     */
+    @Transactional(readOnly = true)
     public List<Schedule> findAll() {
         return scheduleRepo.findAll();
     }
 
-    // Dummy cron generator
-    private String generateCron(Schedule schedule) {
-        return switch (schedule.getType()) {
-            case DAILY -> "0 0 9 * * ?"; // 9h sáng mỗi ngày
-            case WEEKLY -> "0 0 9 ? * MON"; // 9h sáng thứ 2
-            case MONTHLY -> "0 0 9 1 * ?"; // 9h sáng ngày 1 hàng tháng
-            default -> schedule.getCronExpression();
-        };
+    // ================== PRIVATE UTILS ==================
+
+    /**
+     * Tìm template theo id, ném lỗi nếu không tồn tại.
+     */
+    private EmailTemplate getTemplate(Long templateId) {
+        return templateRepo.findById(templateId)
+                .orElseThrow(() -> new EntityNotFoundException("Template not found with id: " + templateId));
+    }
+
+    /**
+     * Map dữ liệu từ ScheduleForm sang Schedule entity.
+     */
+    private void applyFormToSchedule(ScheduleForm form, Schedule schedule, EmailTemplate template) {
+        schedule.setName(form.getName());
+        schedule.setType(form.getType());
+        schedule.setReceiverEmail(form.getReceiverEmail());
+        schedule.setStatus(form.getStatus());
+        schedule.setTemplate(template);
+
+        if (form.getType() != Schedule.Type.CRON) {
+            String cron = CronUtils.generateCron(
+                    form.getType(),
+                    form.getHour(),
+                    form.getMinute(),
+                    form.getDayOfWeek(),
+                    form.getDayOfMonth()
+            );
+            schedule.setCronExpression(cron);
+        } else {
+            schedule.setCronExpression(form.getCronExpression());
+        }
     }
 }

@@ -21,3 +21,6 @@ EXPOSE 8080
 
 # Chạy ứng dụng với giới hạn bộ nhớ
 ENTRYPOINT ["java", "-Xmx512m", "-Xms256m", "-jar", "app.jar"]
+
+ENV TZ=Asia/Ho_Chi_Minh
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
