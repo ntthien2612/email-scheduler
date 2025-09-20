@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.example.emailscheduler.entity.User;
 import com.example.emailscheduler.repository.UserRepository;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -47,7 +46,6 @@ public class UserService {
      *
      * @throws IllegalArgumentException nếu email đã tồn tại
      */
-    @Transactional
     public User create(User user) {
         validateEmailUnique(user.getEmail(), null);
         return userRepository.save(user);
@@ -59,7 +57,6 @@ public class UserService {
      *
      * @throws IllegalArgumentException nếu không tìm thấy user hoặc email đã tồn tại
      */
-    @Transactional
     public User update(Long id, User newUser) {
         User existing = findById(id);
 
@@ -77,7 +74,6 @@ public class UserService {
     /**
      * Xóa user theo ID.
      */
-    @Transactional
     public void delete(Long id) {
         userRepository.deleteById(id);
     }

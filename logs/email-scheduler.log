@@ -1,3 +1,120 @@
-2025-09-20T14:32:42.262+07:00  WARN 9868 --- [email-scheduler] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16h10m49s725ms509µs899ns).
-2025-09-20T14:32:50.840+07:00  WARN 9868 --- [email-scheduler] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@679aa51f (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2025-09-20T14:32:55.895+07:00  WARN 9868 --- [email-scheduler] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@16f931fc (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2025-09-20T16:54:23.082+07:00  INFO 7712 --- [email-scheduler] [main] c.e.e.EmailSchedulerApplication          : Starting EmailSchedulerApplication using Java 17.0.12 with PID 7712 (D:\2025_Project_Side\email-scheduler\email-scheduler\target\classes started by ADMIN in D:\2025_Project_Side\email-scheduler\email-scheduler)
+2025-09-20T16:54:23.085+07:00 DEBUG 7712 --- [email-scheduler] [main] c.e.e.EmailSchedulerApplication          : Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-20T16:54:23.086+07:00  INFO 7712 --- [email-scheduler] [main] c.e.e.EmailSchedulerApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-09-20T16:54:24.455+07:00  INFO 7712 --- [email-scheduler] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-20T16:54:24.556+07:00  INFO 7712 --- [email-scheduler] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 83 ms. Found 3 JPA repository interfaces.
+2025-09-20T16:54:25.451+07:00  INFO 7712 --- [email-scheduler] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-20T16:54:25.467+07:00  INFO 7712 --- [email-scheduler] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-20T16:54:25.468+07:00  INFO 7712 --- [email-scheduler] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-20T16:54:25.546+07:00  INFO 7712 --- [email-scheduler] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-20T16:54:25.547+07:00  INFO 7712 --- [email-scheduler] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2397 ms
+2025-09-20T16:54:25.723+07:00  INFO 7712 --- [email-scheduler] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-20T16:54:25.788+07:00  INFO 7712 --- [email-scheduler] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-20T16:54:25.838+07:00  INFO 7712 --- [email-scheduler] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-20T16:54:26.137+07:00  INFO 7712 --- [email-scheduler] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-20T16:54:26.171+07:00  INFO 7712 --- [email-scheduler] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-20T16:54:26.740+07:00  INFO 7712 --- [email-scheduler] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@731db93f
+2025-09-20T16:54:26.744+07:00  INFO 7712 --- [email-scheduler] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-20T16:54:26.899+07:00  WARN 7712 --- [email-scheduler] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-20T16:54:26.901+07:00  WARN 7712 --- [email-scheduler] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-20T16:54:26.942+07:00  INFO 7712 --- [email-scheduler] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-20T16:54:27.897+07:00  INFO 7712 --- [email-scheduler] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-20T16:54:28.415+07:00  INFO 7712 --- [email-scheduler] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-20T16:54:28.865+07:00  INFO 7712 --- [email-scheduler] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-20T16:54:29.903+07:00  WARN 7712 --- [email-scheduler] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-20T16:54:30.474+07:00  INFO 7712 --- [email-scheduler] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-20T16:54:30.498+07:00  INFO 7712 --- [email-scheduler] [main] c.e.e.EmailSchedulerApplication          : Started EmailSchedulerApplication in 8.041 seconds (process running for 8.407)
+2025-09-20T16:56:06.762+07:00  INFO 7712 --- [email-scheduler] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-20T16:56:06.811+07:00  INFO 7712 --- [email-scheduler] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-20T16:56:06.823+07:00  INFO 7712 --- [email-scheduler] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-20T16:56:06.830+07:00  INFO 7712 --- [email-scheduler] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-20T16:56:06.849+07:00  INFO 7712 --- [email-scheduler] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-20T16:56:19.463+07:00  INFO 21248 --- [email-scheduler] [main] c.e.e.EmailSchedulerApplication          : Starting EmailSchedulerApplication using Java 17.0.12 with PID 21248 (D:\2025_Project_Side\email-scheduler\email-scheduler\target\classes started by ADMIN in D:\2025_Project_Side\email-scheduler\email-scheduler)
+2025-09-20T16:56:19.465+07:00 DEBUG 21248 --- [email-scheduler] [main] c.e.e.EmailSchedulerApplication          : Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-20T16:56:19.467+07:00  INFO 21248 --- [email-scheduler] [main] c.e.e.EmailSchedulerApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-09-20T16:56:20.147+07:00  INFO 21248 --- [email-scheduler] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-20T16:56:20.213+07:00  INFO 21248 --- [email-scheduler] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 3 JPA repository interfaces.
+2025-09-20T16:56:20.731+07:00  INFO 21248 --- [email-scheduler] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-20T16:56:20.748+07:00  INFO 21248 --- [email-scheduler] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-20T16:56:20.749+07:00  INFO 21248 --- [email-scheduler] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-20T16:56:20.809+07:00  INFO 21248 --- [email-scheduler] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-20T16:56:20.810+07:00  INFO 21248 --- [email-scheduler] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1281 ms
+2025-09-20T16:56:20.967+07:00  INFO 21248 --- [email-scheduler] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-20T16:56:21.029+07:00  INFO 21248 --- [email-scheduler] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-20T16:56:21.071+07:00  INFO 21248 --- [email-scheduler] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-20T16:56:21.385+07:00  INFO 21248 --- [email-scheduler] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-20T16:56:21.424+07:00  INFO 21248 --- [email-scheduler] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-20T16:56:21.711+07:00  INFO 21248 --- [email-scheduler] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@75e0a54c
+2025-09-20T16:56:21.714+07:00  INFO 21248 --- [email-scheduler] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-20T16:56:21.776+07:00  WARN 21248 --- [email-scheduler] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-20T16:56:21.779+07:00  WARN 21248 --- [email-scheduler] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-20T16:56:21.811+07:00  INFO 21248 --- [email-scheduler] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-20T16:56:23.005+07:00  INFO 21248 --- [email-scheduler] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-20T16:56:23.207+07:00  INFO 21248 --- [email-scheduler] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-20T16:56:23.594+07:00  INFO 21248 --- [email-scheduler] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-20T16:56:24.488+07:00  WARN 21248 --- [email-scheduler] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-20T16:56:25.180+07:00  INFO 21248 --- [email-scheduler] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-20T16:56:25.203+07:00  INFO 21248 --- [email-scheduler] [main] c.e.e.EmailSchedulerApplication          : Started EmailSchedulerApplication in 6.217 seconds (process running for 6.53)
+2025-09-20T16:57:18.713+07:00  INFO 21248 --- [email-scheduler] [http-nio-0.0.0.0-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-20T16:57:18.713+07:00  INFO 21248 --- [email-scheduler] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-20T16:57:18.713+07:00  INFO 21248 --- [email-scheduler] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-09-20T17:05:54.003+07:00  INFO 21248 --- [email-scheduler] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-20T17:05:54.039+07:00  INFO 21248 --- [email-scheduler] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-20T17:05:54.046+07:00  INFO 21248 --- [email-scheduler] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-20T17:05:54.052+07:00  INFO 21248 --- [email-scheduler] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-20T17:05:54.076+07:00  INFO 21248 --- [email-scheduler] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-20T17:06:06.302+07:00  INFO 18512 --- [email-scheduler] [main] c.e.e.EmailSchedulerApplication          : Starting EmailSchedulerApplication using Java 17.0.12 with PID 18512 (D:\2025_Project_Side\email-scheduler\email-scheduler\target\classes started by ADMIN in D:\2025_Project_Side\email-scheduler\email-scheduler)
+2025-09-20T17:06:06.302+07:00 DEBUG 18512 --- [email-scheduler] [main] c.e.e.EmailSchedulerApplication          : Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-20T17:06:06.302+07:00  INFO 18512 --- [email-scheduler] [main] c.e.e.EmailSchedulerApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-09-20T17:06:07.022+07:00  INFO 18512 --- [email-scheduler] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-20T17:06:07.102+07:00  INFO 18512 --- [email-scheduler] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 65 ms. Found 3 JPA repository interfaces.
+2025-09-20T17:06:07.582+07:00  INFO 18512 --- [email-scheduler] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-20T17:06:07.597+07:00  INFO 18512 --- [email-scheduler] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-20T17:06:07.597+07:00  INFO 18512 --- [email-scheduler] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-20T17:06:07.665+07:00  INFO 18512 --- [email-scheduler] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-20T17:06:07.665+07:00  INFO 18512 --- [email-scheduler] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1291 ms
+2025-09-20T17:06:07.813+07:00  INFO 18512 --- [email-scheduler] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-20T17:06:07.870+07:00  INFO 18512 --- [email-scheduler] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-20T17:06:07.914+07:00  INFO 18512 --- [email-scheduler] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-20T17:06:08.156+07:00  INFO 18512 --- [email-scheduler] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-20T17:06:08.191+07:00  INFO 18512 --- [email-scheduler] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-20T17:06:08.381+07:00  INFO 18512 --- [email-scheduler] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@58739e5e
+2025-09-20T17:06:08.383+07:00  INFO 18512 --- [email-scheduler] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-20T17:06:08.428+07:00  WARN 18512 --- [email-scheduler] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-20T17:06:08.428+07:00  WARN 18512 --- [email-scheduler] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-20T17:06:08.447+07:00  INFO 18512 --- [email-scheduler] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-20T17:06:09.282+07:00  INFO 18512 --- [email-scheduler] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-20T17:06:09.448+07:00  INFO 18512 --- [email-scheduler] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-20T17:06:09.688+07:00  INFO 18512 --- [email-scheduler] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-20T17:06:10.127+07:00  WARN 18512 --- [email-scheduler] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-20T17:06:10.552+07:00  INFO 18512 --- [email-scheduler] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-20T17:06:10.570+07:00  INFO 18512 --- [email-scheduler] [main] c.e.e.EmailSchedulerApplication          : Started EmailSchedulerApplication in 4.732 seconds (process running for 5.039)
+2025-09-20T17:06:15.065+07:00  INFO 18512 --- [email-scheduler] [http-nio-0.0.0.0-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-20T17:06:15.069+07:00  INFO 18512 --- [email-scheduler] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-20T17:06:15.072+07:00  INFO 18512 --- [email-scheduler] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2025-09-20T17:08:01.250+07:00  INFO 18512 --- [email-scheduler] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-20T17:08:01.282+07:00  INFO 18512 --- [email-scheduler] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-20T17:08:01.282+07:00  INFO 18512 --- [email-scheduler] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-20T17:08:01.305+07:00  INFO 18512 --- [email-scheduler] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-20T17:08:01.327+07:00  INFO 18512 --- [email-scheduler] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

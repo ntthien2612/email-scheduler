@@ -1,24 +1,24 @@
 package com.example.emailscheduler.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.example.emailscheduler.dto.ScheduleForm;
 import com.example.emailscheduler.entity.EmailTemplate;
 import com.example.emailscheduler.entity.Schedule;
 import com.example.emailscheduler.repository.EmailTemplateRepository;
 import com.example.emailscheduler.repository.ScheduleRepository;
 import com.example.emailscheduler.util.CronUtils;
+
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * Service xử lý nghiệp vụ liên quan đến Schedule.
  */
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class ScheduleService {
 
     private final ScheduleRepository scheduleRepo;
@@ -57,7 +57,6 @@ public class ScheduleService {
     /**
      * Tìm Schedule theo id.
      */
-    @Transactional(readOnly = true)
     public Schedule findById(Long id) {
         return scheduleRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Schedule not found with id: " + id));
@@ -66,7 +65,6 @@ public class ScheduleService {
     /**
      * Lấy tất cả Schedule.
      */
-    @Transactional(readOnly = true)
     public List<Schedule> findAll() {
         return scheduleRepo.findAll();
     }

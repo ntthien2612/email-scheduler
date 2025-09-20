@@ -10,9 +10,7 @@ import com.example.emailscheduler.entity.Schedule;
 import com.example.emailscheduler.repository.ScheduleRepository;
 import com.example.emailscheduler.util.CronUtils;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Component
@@ -24,7 +22,6 @@ public class EmailJobScheduler {
     private final MailService mailService;
 
     @Scheduled(cron = "0 * * * * *") // chạy mỗi phút
-    @Transactional
     public void runSchedules() {
         LocalDateTime now = LocalDateTime.now();
         List<Schedule> schedules = scheduleRepository.findByStatusWithTemplate(Schedule.Status.ACTIVE);
