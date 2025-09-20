@@ -38,8 +38,7 @@ public class EmailJobScheduler {
                             s.getReceiverEmail(), s.getTemplate().getName(), now);
                 }
             } catch (Exception e) {
-                log.error("Failed to send email to {} at {}. Reason: {}",
-                        s.getReceiverEmail(), now, e.getMessage(), e);
+                log.error("Failed to send email to {} at {}. Reason: {}", s.getReceiverEmail(), now, e.getMessage(), e);
             }
         }
     }

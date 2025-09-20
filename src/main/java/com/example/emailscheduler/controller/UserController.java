@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.emailscheduler.entity.User;
 import com.example.emailscheduler.service.UserService;
@@ -55,11 +56,18 @@ public class UserController {
     @PostMapping("/new")
     public String create(
             @Valid @ModelAttribute("user") User user,
-            BindingResult result) {
+            BindingResult result, 
+            RedirectAttributes redirect) {
         if (result.hasErrors()) {
             return "user/form";
         }
-        userService.create(user);
+        try {
+            userService.create(user);
+            redirect.addFlashAttribute("success", "User added successfully!");
+        } catch (IllegalArgumentException e) {
+            result.rejectValue("email", "error.user", e.getMessage());
+            return "user/form";
+        }
         return "redirect:/users";
     }
 
@@ -79,11 +87,18 @@ public class UserController {
     public String update(
             @PathVariable Long id,
             @Valid @ModelAttribute("user") User user,
-            BindingResult result) {
+            BindingResult result,
+            RedirectAttributes redirect) {
         if (result.hasErrors()) {
             return "user/form";
         }
-        userService.update(id, user);
+        try {
+            userService.update(id, user);
+            redirect.addFlashAttribute("success", "User updated successfully!");
+        } catch (IllegalArgumentException e) {
+            result.rejectValue("id", "error.user", e.getMessage());
+            return "user/form";
+        }
         return "redirect:/users";
     }
 
@@ -91,8 +106,10 @@ public class UserController {
      * Xử lý xóa user theo ID.
      */
     @PostMapping("/{id}/delete")
-    public String delete(@PathVariable Long id) {
+    public String delete(@PathVariable Long id,
+            RedirectAttributes redirect) {
         userService.delete(id);
+        redirect.addFlashAttribute("success", "User deleted successfully!");
         return "redirect:/users";
     }
 }

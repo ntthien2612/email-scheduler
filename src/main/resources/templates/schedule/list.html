@@ -26,7 +26,7 @@
             <table class="table table-hover table-striped align-middle mb-0">
                 <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
+                    <th>#</th>
                     <th>Name</th>
                     <th>Type</th>
                     <th>Cron Expression</th>
@@ -37,8 +37,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="s : ${schedules}">
-                        <td th:text="${s.id}"></td>
+                    <tr th:each="s, start : ${schedules}">
+                        <td th:text="${start.count}"></td>
                         <td th:text="${s.name}"></td>
                         <td th:text="${s.type}"></td>
                         <td><code th:text="${s.cronExpression}"></code></td>

@@ -59,7 +59,7 @@ public class ScheduleController {
         }
         try {
             scheduleService.create(scheduleForm);
-            redirect.addFlashAttribute("success", "Thêm Schedule thành công!");
+            redirect.addFlashAttribute("success", "Schedule added successfully!");
             return "redirect:/schedules";
         } catch (IllegalStateException e) {
             model.addAttribute("error", e.getMessage());
@@ -131,12 +131,12 @@ public class ScheduleController {
     private void validateCronExpression(ScheduleForm scheduleForm, BindingResult result) {
         if (scheduleForm.getType() == Schedule.Type.CRON) {
             String cron = scheduleForm.getCronExpression();
-            String regex = "^([0-5]?\\d)\\s"            // second
-                         + "([0-5]?\\d)\\s"            // minute
-                         + "([01]?\\d|2[0-3])\\s"      // hour
-                         + "((\\*|[1-9]|[12]\\d|3[01]))\\s" // day-of-month
-                         + "(\\*|[1-9]|1[0-2])\\s"     // month
-                         + "(\\*|MON|TUE|WED|THU|FRI|SAT|SUN)$"; // day-of-week
+            String regex = "^([0-5]?\\d)\\s"                  // second (0-59)
+                + "([0-5]?\\d)\\s"                  // minute (0-59)
+                + "([01]?\\d|2[0-3])\\s"            // hour (0-23)
+                + "(\\*|[1-9]|[12]\\d|3[01])\\s"    // day-of-month (*,1-31)
+                + "(\\*|[1-9]|1[0-2])\\s"           // month (*,1-12)
+                + "(\\*|MON|TUE|WED|THU|FRI|SAT|SUN)$"; // day-of-week (*, MON-SUN)
 
             if (cron == null || cron.isBlank() || !cron.matches(regex)) {
                 result.rejectValue("cronExpression", "cronExpression.invalid",
