@@ -1,5 +1,6 @@
 package com.example.emailscheduler.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,4 +33,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @return true nếu tồn tại
      */
     boolean existsByEmail(String email);
+
+    /**
+     * Lấy danh sách user theo trạng thái.
+     *
+     * @param status trạng thái (ACTIVE/INACTIVE)
+     * @return List<User>
+     */
+    List<User> findByStatus(User.Status status);
 }

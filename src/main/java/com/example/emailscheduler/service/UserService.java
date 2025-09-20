@@ -42,6 +42,13 @@ public class UserService {
     }
 
     /**
+     * Lấy danh sách user theo trạng thái.
+     */
+    public List<User> findByStatus(User.Status status) {
+        return userRepository.findByStatus(status);
+    }
+
+    /**
      * Tạo mới user, kiểm tra email trùng lặp trước khi lưu.
      *
      * @throws IllegalArgumentException nếu email đã tồn tại

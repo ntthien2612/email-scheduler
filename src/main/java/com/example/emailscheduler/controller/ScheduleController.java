@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.emailscheduler.dto.ScheduleForm;
 import com.example.emailscheduler.entity.Schedule;
+import com.example.emailscheduler.entity.User;
 import com.example.emailscheduler.service.EmailTemplateService;
 import com.example.emailscheduler.service.ScheduleService;
 import com.example.emailscheduler.service.UserService;
@@ -150,6 +151,6 @@ public class ScheduleController {
     private void prepareFormModel(Model model, ScheduleForm scheduleForm) {
         model.addAttribute("scheduleForm", scheduleForm);
         model.addAttribute("templates", templateService.findAll());
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute("users", userService.findByStatus(User.Status.ACTIVE));
     }
 }
