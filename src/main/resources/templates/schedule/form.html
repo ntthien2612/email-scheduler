@@ -73,7 +73,7 @@
                 <div class="mb-3 type-dependent" data-types="CRON">
                     <label class="form-label fw-bold">Cron Expression</label>
                     <input type="text" th:field="*{cronExpression}" class="form-control"
-                           placeholder="e.g. 0 0 9 * * ?"
+                           placeholder="e.g. 0 0 9 * * *"
                            title="Cron format: second minute hour day month day-of-week"/>
                     <div class="text-danger small" th:if="${#fields.hasErrors('cronExpression')}" th:errors="*{cronExpression}"></div>
                     <div class="form-text">
